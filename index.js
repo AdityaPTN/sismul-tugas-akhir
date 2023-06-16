@@ -42,19 +42,26 @@ app.post('/upload', multer.single('imgfile'), (req, res) => {
   }
 });
 
-app.get('/files', async (req, res) => {
+app.get('/bucket', async (req, res) => {
   try {
     const [files] = await bucket.getFiles();
-    const fileNames = files.map((file) => file.name);
-    res.render('file', { files: fileNames });
+
+    const fileData = files.map((file) => {
+      return {
+        name: file.name,
+        size: file.metadata.size,
+      };
+    });
+
+    res.render('file', { files: fileData });
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
   }
 });
 
-app.get('/main', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+app.get('/', (req, res) => {
+  res.render('index');
 });
 
 app.listen(port, () => {

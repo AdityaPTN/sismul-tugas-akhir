@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Storage</title>
-  </head>
-  <body>
+<%- include('header') %>
+<body>
     <h2>Files:</h2>
     <ul>
       <% files.forEach(function(file) { %>
-        <li><%= file %></li>
-        <img src="https://storage.googleapis.com/bucketforsismul/<%= file %>" alt="<%= file %>">
+        <li>
+          <span>Name: <%= file.name %></span>
+          <br>
+          <span>Size: <%= (file.size / 1024).toFixed(2) %> KB</span>
+          <br>
+          <img src="https://storage.googleapis.com/bucketforsismul/<%= file.name %>" alt="<%= file.name %>">
+        </li>
       <% }); %>
     </ul>
-
-
-  </body>
+</body>
 </html>
