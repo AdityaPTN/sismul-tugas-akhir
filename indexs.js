@@ -6,8 +6,6 @@ const { Storage } = require('@google-cloud/storage');
 const Multer = require('multer');
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, "views")));
-
 app.set('view engine', 'ejs');
 
 const multer = Multer({
@@ -42,20 +40,20 @@ app.post('/upload', multer.single('imgfile'), (req, res) => {
   }
 });
 
-app.get('/files', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const [files] = await bucket.getFiles();
     const fileNames = files.map((file) => file.name);
-    res.render('file', { files: fileNames });
+    res.render('index', { files: fileNames });
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
   }
 });
 
-app.get('/main', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
+app.get("/main", (req, res)=>{
+    res.sendFile("/index.html");
+})
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

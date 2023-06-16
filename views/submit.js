@@ -49,7 +49,7 @@ document.getElementById('submitbtn').addEventListener('click', () => {
     .then(compressedBlob => {
       // Create a new File object from the Blob data
       const fileName = inputElem.name.split('.')[0];
-      const imageFile = new File([compressedBlob], `${fileName}_post.jpeg`, {
+      const imageFile = new File([compressedBlob], `${fileName}.jpeg`, {
         type: 'image/jpeg',
       });
 
