@@ -1,16 +1,30 @@
 <%- include('header') %>
 <body>
-    <h2>Files:</h2>
-    <ul>
+  <h2 class="text-center m-5">Compressed Images</h2>
+  <div class="container">
+    <div class="row">
       <% files.forEach(function(file) { %>
-        <li>
-          <span>Name: <%= file.name %></span>
-          <br>
-          <span>Size: <%= (file.size / 1024).toFixed(2) %> KB</span>
-          <br>
-          <img src="https://storage.googleapis.com/bucketforsismul/<%= file.name %>" alt="<%= file.name %>">
-        </li>
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="https://storage.googleapis.com/bucketforsismul/<%= file.name %>" alt="<%= file.name %>" class="card-img img-thumbnail" style="width: 100%;">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Name: <%= file.name %></h5>
+                  <p class="card-text">Size: <%= (file.size / 1024).toFixed(2) %> KB</p>
+                  <div class="mt-auto text-right">
+                    <a href="https://storage.googleapis.com/bucketforsismul/<%= file.name %>" class="btn btn-primary" download>Download</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <% }); %>
-    </ul>
+    </div>
+  </div>
 </body>
+
 </html>
